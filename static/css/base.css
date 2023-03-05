@@ -1,0 +1,323 @@
+<style type="text/css">
+...
+</style>
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,700&display=swap");
+
+/* Variables */
+:root {
+    --font-family: "Roboto", sans-serf;
+    --normal-font: 400;
+    --bold-font: 700;
+    --bolder-font: 900;
+    --bg-color: #fcfcfc;
+    --primary-color: #4756df;
+    --secondary-color: #ff7235;
+    --primary-shadow: #8b8eaf;
+    --secondary-shadow: #a17a69;
+    --bottom-margin: 0.5rem;
+    --bottom-margin-2: 1rem;
+    --line-height: 1.7rem;
+    --transition: 0.3s;
+}
+
+/* Variables end */
+
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+}
+header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3.5rem;
+    background-color: var(--bg-color);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+header a{
+    text-decoration:none;
+    color:var(--bg-color)
+}
+header h1 {
+    color: var(--primary-color);
+}
+button{
+    padding: 10px 20px;
+        border: none;
+        font-size: 17px;
+      
+        border-radius: 7px;
+        letter-spacing: 4px;
+        font-weight: var(--bold-font);
+        text-transform: uppercase;
+        transition: 0.5s;
+        transition-property: var(--transition);
+        background: var(--primary-color)
+            
+}
+
+
+.intro-section {
+    display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        max-width: 68.75rem;
+        margin: auto;
+        position:sticky;
+}
+#search{
+    margin-left: 50px;
+}
+
+.hidden{
+    display:none;
+}
+#bookshelf{
+    
+    
+}
+
+.book-card {
+    margin-left: 140px;
+  display: inline-block;
+  width: 33.33%;
+  padding: 1rem;
+  text-align: center;
+  vertical-align: top;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+  border-bottom:5px solid var(--primary-shadow);
+  border-left:5px solid var(--primary-shadow);
+}
+
+
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.book-pic {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.book-details {
+  margin-bottom: 1rem;
+}
+
+.book-name {
+  font-weight: var(--bold-font);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.book-description {
+  font-size: 1.2rem;
+  line-height: var(--line-height);
+  color: var(--primary-shadow);
+}
+
+.book-genre {
+  font-weight: var(--bold-font);
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+}
+
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,700&display=swap");
+
+/* Variables */
+:root {
+    --font-family: "Roboto", sans-serf;
+    --normal-font: 400;
+    --bold-font: 700;
+    --bolder-font: 900;
+    --bg-color: #fcfcfc;
+    --primary-color: #4756df;
+    --secondary-color: #ff7235;
+    --primary-shadow: #8b8eaf;
+    --secondary-shadow: #a17a69;
+    --bottom-margin: 0.5rem;
+    --bottom-margin-2: 1rem;
+    --line-height: 1.7rem;
+    --transition: 0.3s;
+}
+
+/* Variables end */
+
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+}
+header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3.5rem;
+    background-color: var(--bg-color);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+header a{
+    text-decoration:none;
+    color:var(--bg-color)
+}
+header h1 {
+    color: var(--primary-color);
+}
+button{
+    padding: 10px 20px;
+        border: none;
+        font-size: 17px;
+      
+        border-radius: 7px;
+        letter-spacing: 4px;
+        font-weight: var(--bold-font);
+        text-transform: uppercase;
+        transition: 0.5s;
+        transition-property: var(--transition);
+        background: var(--primary-color)
+            
+}
+
+
+.intro-section {
+    display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        max-width: 68.75rem;
+        margin: auto;
+        position:sticky;
+}
+#search{
+    margin-left: 50px;
+}
+
+.hidden{
+    display:none;
+}
+#bookshelf{
+    
+    
+}
+
+.book-card {
+    margin-left: 140px;
+  display: inline-block;
+  width: 33.33%;
+  padding: 1rem;
+  text-align: center;
+  vertical-align: top;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+  border-bottom:5px solid var(--primary-shadow);
+  border-left:5px solid var(--primary-shadow);
+}
+
+
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.book-pic {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.book-details {
+  margin-bottom: 1rem;
+}
+
+.book-name {
+  font-weight: var(--bold-font);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.book-description {
+  font-size: 1.2rem;
+  line-height: var(--line-height);
+  color: var(--primary-shadow);
+}
+
+.book-genre {
+  font-weight: var(--bold-font);
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+}
+/* Addbook form   */
+.add-book{
+    margin:auto;
+            max-width: 50%;
+        }
+.add-book h2{
+        text-align: center;
+        margin-bottom: var(--bottom-margin-2);
+         color: var(--primary-color);
+}
+.add-book p{
+    padding: 0.4rem;}
+.add-book label {
+    margin-top:300px;
+        line-height: 2.7em;
+        font-weight: var(--bold-font);
+        color: var(--primary-color);
+    }
+.add-book textarea{ display:block;
+    min-width:90%;
+    min-height:40%;
+    margin-top:2px;
+    margin:auto;
+    border: 2px outset var(--primary-color);
+
+}
+.add-book input{
+     width: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 5px;
+        border: none;
+        border: 2px outset var(--primary-color);
+        font-size: 0.875rem;
+        outline: none;
+}
+.add-book placeholder {
+        padding: 0.5rem;
+        color: var(--primary-color);
+    }
+
+    .submit-btn {
+        color:var(--bg-color);
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        background-color:var(--primary-color) ;
+        border: 2px solid #fff ;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: var(--bold-font);
+        transition: var(--transition);
+    }
+
+    .submit-btn:hover {
+        background-color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+        cursor: pointer;
+    }

@@ -1,0 +1,70 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content=" A Collection of nice books" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/static/css/normalize.css" />
+    
+       <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
+       
+
+    <link rel="stylesheet" href="/static/css/base.css" />
+    <!-- Animate CSS CDN -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <script src="/static/js/app.js"></script>
+    <title>Sergio Herrera's Book Inventory App</title>
+    
+    <link rel="icon" type="image/x-icon" href="{{url_for('static',filename='/images/favicon.png')}}" />
+  </head>
+  <body>
+    <header>
+      <a href="{{url_for('index')}}">
+        <picture>
+           
+          <img src="{{url_for('static', filename='/images/sahvsergio.svg')}}" alt="sergio herrera" />
+        </picture>
+      </a>
+
+      <a href="{{url_for('index')}}">
+        <h1 class="h1">Book Inventory App</h1>
+      </a>
+      {% block button %} {% endblock %}
+    </header>
+  <main>
+            {% block content %}
+        
+            {% endblock %}
+        </main>   
+
+    
+    <footer>
+      <p class="copy">&copy; Copyright 2023</p>
+      <p class="copy">
+        Built with &#x2661; by
+        <a href="https://twitter.com/sahvsergio" target="_blank"
+          >Sergio Herrera (sahvsergio)</a
+        >
+      </p>
+    </footer>
+
+    <!-- Ion icons scripts -->
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>

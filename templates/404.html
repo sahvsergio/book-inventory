@@ -1,0 +1,25 @@
+{% extends'layout.html' %}
+
+{%block button %}
+<a href={{url_for('add_book')}}>Add Book</a>
+
+{% endblock %}
+
+{% block content %}
+<section id="not-found">
+
+   
+        
+            
+        <img  id="404-image"src="https://media.giphy.com/media/l0HlOBZcl7sbV6LnO/giphy.gif" alt=""> 
+         
+     
+           
+            <h2>Hmmm ... it seems this page can't be  read!</h2>
+            <p>{{msg}}</p>
+          
+<a href="{{url_for('index')}}"> To return to the home page, click here
+
+</a>
+</section>
+{% endblock %}
