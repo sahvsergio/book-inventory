@@ -3,7 +3,7 @@
 
 
 {%block button %}
-<button id="add_book> <a href="{{url_for('add_book')}}">Back</a> </button>
+<button id="add_book"> <a href="{{url_for('add_book')}}">Add Book</a> </button>
 <button id="back-btn"><a href="{{url_for('index')}}">Back</a> </button>
 
 
@@ -14,7 +14,7 @@
    
    
         <div id="book-name" class="book-card">
-            <img  class='book-cover'src="url_for{{book_cover}}   " > 
+            <img  class='book-cover'src="{{ book_cover_url }}"> 
             <h2>{{book.book_name}}</h2> 
             <h2>{{ book.number_of_pages }} Pages</h2>
             <h2>Description</h2>

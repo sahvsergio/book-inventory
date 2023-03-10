@@ -51,11 +51,11 @@ def book(id):
     book_length = Book.query.all()
     isbn = book.isbn
     print('this is the isbn for this book', isbn)
-    book_cover = requests.get(
-        f'https://covers.openlibrary.org/b/isbn/{isbn}-L.jpg')
+    book_cover = requests.get(f'https://covers.openlibrary.org/b/isbn/{isbn}-L.jpg')
     if book_cover.status_code == 200:
+        book_cover_url= book_cover.url
         print('this is the url for the book cover', book_cover.url)
-        return render_template('book.html', book=book, book_length=book_length, isbn=isbn, book_cover=book_cover)
+        return render_template('book.html', book=book, book_length=book_length, isbn=isbn, book_cover_url=book_cover_url)
     else:
         return render_template('book.html', book=book, book_length=book_length, isbn=isbn, book_cover=book_cover)
 
@@ -152,5 +152,5 @@ if __name__ == '__main__':  # if it were to be exported to a diffent filem then 
     # making the app run, you just need to run the app.py file on the terminal
     # local app.run(debug=True , port=8000, host='127.0.0.1')
     #internet
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8080,debug=True)
     
