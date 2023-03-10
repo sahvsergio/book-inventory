@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+#import matplotlib
+import matplotlib as plt
+
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import sqlite3
 from crypt import methods
 from flask import render_template
@@ -17,10 +21,15 @@ import sqlalchemy
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
+import pandas as pd
+#connect to the dabatase for pandas
+engine = db.get_engine()
+
 
 
 admin = Admin(app, name='Admin Panel', template_mode='bootstrap3')
 admin.add_view(ModelView(Book, db.session))
+
 
 
 # create routes(visible parts of the site- urls)
@@ -119,6 +128,14 @@ def search():
         return redirect('/')
     
 
+@app.route('/stats')
+def stats():
+    #create the conn argument
+    query=db.session.query(Book)
+    #read sql using pandas
+    books=pd.read_sql(query.statement,engine)
+    print(books.head())
+    return render_template('stats.html', image_data=image_data)
 
 
 
@@ -136,3 +153,4 @@ if __name__ == '__main__':  # if it were to be exported to a diffent filem then 
     # local app.run(debug=True , port=8000, host='127.0.0.1')
     #internet
     app.run(host='0.0.0.0', port=8080)
+    
