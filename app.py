@@ -27,6 +27,8 @@ with app.app_context():
     engine = db.get_engine()
 
 
+
+
 admin = Admin(app, name='Admin Panel', template_mode='bootstrap3')
 admin.add_view(ModelView(Book, db.session))
 
