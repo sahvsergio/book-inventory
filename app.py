@@ -23,8 +23,8 @@ from flask_admin.contrib.sqla import ModelView
 
 import pandas as pd
 #connect to the dabatase for pandas
-engine = db.get_engine()
-
+with app.app_context():
+    engine = db.get_engine()
 
 
 admin = Admin(app, name='Admin Panel', template_mode='bootstrap3')
