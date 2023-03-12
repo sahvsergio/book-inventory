@@ -35,7 +35,17 @@ def index():
         """creates the homepage for the app"""
         books = Book.query.all()
         total_books = len(books)
-        return render_template('index.html', books=books, total_books=total_books)
+        book_cover_urls=[]
+        for book in books:
+            isbn=book.isbn
+            book_cover= requests.get(f'https://covers.openlibrary.org/b/isbn/{isbn}-M.jpg')
+            if book_cover.status_code==200:
+                book_cover_urls.append(book_cover.url)
+            else:
+                
+                book_cover_urls.append(None)
+              
+        return render_template('index.html', books=books, total_books=total_books, book_cover_urls=book_cover_urls)
 
 @app.route('/book/<id>')
 def book(id):

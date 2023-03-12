@@ -38,14 +38,14 @@ Use the search bar to find specific books, or browse through our various categor
    {% if books %}
         
           
-        {%for book in  books %}  
+        {%for book  in books %}  
         
             
         
         <p class=''>  You are seeing  <strong> {{total_results}}</strong>  results for your query</p>
          <div class="book-card">
-          <a href="{{ url_for('book', id=book.id) }}" target="_blank">
-          <img src="{{ book_cover_url }}" alt="{{ book.book_name }}" loading="lazy" class="book-pic">
+          <a href="{{ book_cover_urls[loop.index0] }}" target="_blank">
+          <img src="{{ url_for('static', filename=book.book_cover_url) }}" alt="{{ book.book_name }}" loading="lazy" class="book-pic">
           <div class="book-details">
           <h3 class="book-name">{{ book.book_name }}</h3>
           <p class="book-description">{{ book.description }}</p>
@@ -76,8 +76,9 @@ Use the search bar to find specific books, or browse through our various categor
     <section id="bookshelf">
   {% for book in books %}
     <div class="book-card">
+      
       <a href="{{ url_for('book', id=book.id) }}" target="_blank">
-        <img src="assets/images/static/a-book-g15d910a91_1920.jpg" alt="{{ book.book_name }}" loading="lazy" class="book-pic">
+        <img src="{{ book_cover_urls[loop.index0] }}" alt="{{ book.book_name }}" loading="lazy" class="book-pic">
         <div class="book-details">
           <h3 class="book-name">{{ book.book_name }}</h3>
           <p class="book-description">{{ book.description }}</p>
