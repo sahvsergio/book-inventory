@@ -1,13 +1,19 @@
-{% extends'layout.html' %} {%block button %}
+{% extends'layout.html' %} 
+
+{%block button %}
 
 <button id="back-btn"><a href="{{url_for('index')}}">Back</a></button>
-{% endblock %} {% block content %}
-<section class="stats">
-  <img
-    class="chart"
-    src="data:image/png;base64,{{ image_data|b64encode }}"
-    alt="My Chart"
-  />
+{% endblock %} 
+
+{% block content %}
+
+
+{% for table in tables %}
+            
+            {{ table|safe }}
+{% endfor %}
+  
+
 </section>
 
 {% endblock %}

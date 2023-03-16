@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
 
-# Standard library imports
-import shutil
-import sqlite3
+
 
 # Third party imports
 import matplotlib as plt
@@ -133,8 +131,9 @@ def stats():
         query = db.session.query(Book)
         # read sql using pandas
         books = pd.read_sql(query.statement, engine)
+        print(type(books))
         print(books.head())
-        return render_template('stats.html', image_data=image_data)
+        return render_template('stats.html',tables=[books.to_html(classes='data',header="true")])
 
 @app.errorhandler(404)
 def not_found(error):
