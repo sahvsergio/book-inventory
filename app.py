@@ -133,7 +133,7 @@ def stats():
         books = pd.read_sql(query.statement, engine)
         print(type(books))
         print(books.head())
-        return render_template('stats.html',tables=[books.to_html(classes='data',header="true")])
+        return render_template('stats.html',tables=[books.to_html(classes='data',header="true",justify='center')])
 
 @app.errorhandler(404)
 def not_found(error):

@@ -321,3 +321,31 @@ button{
         border: 2px solid var(--primary-color);
         cursor: pointer;
     }
+/* Table Css*/
+
+table {
+  border-collapse: collapse;
+  width: 90%;
+  margin: 0 auto;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+  background-color: #ddd;
+}
+
