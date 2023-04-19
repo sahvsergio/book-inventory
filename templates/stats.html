@@ -7,7 +7,7 @@
 
 {% block content %}
 
-
+<section id=table>
 {% for table in tables %}
             
             {{ table|safe }}
@@ -15,5 +15,12 @@
   
 
 </section>
+<section id='charts'>
+     <h1>Chart</h1>
+
+      <p>{{ name }}</p>
+
+      <img src={{ name }} alt="Chart" height="42" width="42">
+<section>
 
 {% endblock %}

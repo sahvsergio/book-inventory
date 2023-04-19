@@ -5,6 +5,7 @@
 
 # Third party imports
 import matplotlib as plt
+import numpy as np
 import pandas as pd
 import requests
 import sqlalchemy
@@ -22,8 +23,14 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 with app.app_context():
     engine = db.get_engine()
 
+app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 admin = Admin(app, name='Admin Panel', template_mode='bootstrap3')
+
 admin.add_view(ModelView(Book, db.session))
+
+
+
+
 
     # create routes(visible parts of the site- urls)
 
@@ -131,9 +138,18 @@ def stats():
         query = db.session.query(Book)
         # read sql using pandas
         books = pd.read_sql(query.statement, engine)
+        id_column=books.pop('id')
+        books.insert(0,'id',id_column)
+        #charts
+        genre=(books['Genre'])
+        print(genre)
+        
+        
+        
         print(type(books))
         print(books.head())
-        return render_template('stats.html',tables=[books.to_html(classes='data',header="true",justify='center')])
+
+        return render_template('stats.html',tables=[books.to_html(classes='data',header="true",justify='center', index=False)])
 
 @app.errorhandler(404)
 def not_found(error):
