@@ -1,0 +1,46 @@
+body {
+  background-color: #fff;
+  font-family: sans-serif;
+}
+
+.login-form {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+}
+
+.login-form h2 {
+  text-align: center;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+.login-form button {
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.login-form .books {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.login-form .book {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  background-color: #ccc;
+  border: 1px solid #ddd;
+}

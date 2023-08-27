@@ -1,26 +1,8 @@
-{% extends'layout.html' %} 
-
-{%block button %}
+{% extends'layout.html' %} {%block button %}
 
 <button id="back-btn"><a href="{{url_for('index')}}">Back</a></button>
-{% endblock %} 
+{% endblock %} % block content %}
 
-{% block content %}
-
-<section id=table>
-{% for table in tables %}
-            
-            {{ table|safe }}
-{% endfor %}
-  
-
+<section id="table">
+  {% for table in tables %} {{ table|safe }} {% endfor %}
 </section>
-<section id='charts'>
-     <h1>Chart</h1>
-
-      <p>{{ name }}</p>
-
-      <img src={{ name }} alt="Chart" height="42" width="42">
-<section>
-
-{% endblock %}
