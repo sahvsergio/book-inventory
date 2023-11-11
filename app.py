@@ -38,7 +38,9 @@ admin.add_view(ModelView(Book, db.session))
 @app.route('/', methods=['GET', 'POST'])  # decorator
 def index():
     """creates the homepage for the app"""
+    # get the entire books
     books = Book.query.all()
+    # print the total books
     total_books = len(books)
     book_cover_urls = []
     for book in books:
@@ -50,8 +52,16 @@ def index():
         else:
 
             book_cover_urls.append(None)
+    # prepare pagination
+    page = request.args.get('page', 1, type=int)
+    per_page = 2
 
-    return render_template('index.html', books=books, total_books=total_books, book_cover_urls=book_cover_urls)
+    start = (page-1)*per_page
+    end = start+per_page
+    total_pages = (len(books)+per_page-1)//per_page
+    books_on_page = books[start:end]
+
+    return render_template('index.html', books=books, total_books=total_books, book_cover_urls=book_cover_urls, books_on_page=books_on_page, total_pages=total_pages, page = page)
 
 
 @app.route('/book/<id>')
@@ -141,7 +151,7 @@ def search():
 
 @app.route('/stats')
 def stats():
-   pass
+    pass
 
 
 @app.errorhandler(404)
