@@ -42,7 +42,7 @@ Use the search bar to find specific books, or browse through our various categor
         
             
         
-        <p class=''>  You are seeing  <strong> {{total_results}}</strong>  results for your query</p>
+        <p class=''>  You are seeing  <strong id='total'> {{total_results}}</strong>  results for your query</p>
          <div class="book-card">
           <a href="{{ book_cover_urls[loop.index0] }}" target="_blank">
           <img src="{{ url_for('static', filename=book.book_cover_url) }}" alt="{{ book.book_name }}" loading="lazy" class="book-pic">

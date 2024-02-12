@@ -12,6 +12,7 @@ import numpy as np
 import pandas as pd
 import requests
 import sqlalchemy
+from sqlalchemy import create_engine
 
 from flask import flash, redirect, render_template, request, url_for
 
@@ -61,7 +62,7 @@ def index():
     total_pages = (len(books)+per_page-1)//per_page
     books_on_page = books[start:end]
 
-    return render_template('index.html', books=books, total_books=total_books, book_cover_urls=book_cover_urls, books_on_page=books_on_page, total_pages=total_pages, page = page)
+    return render_template('index.html', books=books, total_books=total_books, book_cover_urls=book_cover_urls, books_on_page=books_on_page, total_pages=total_pages, page=page)
 
 
 @app.route('/book/<id>')
@@ -151,7 +152,10 @@ def search():
 
 @app.route('/stats')
 def stats():
-    pass
+
+    records = Book.query
+        
+    return render_template('stats.html', title='Book Stats', records=records)
 
 
 @app.errorhandler(404)
