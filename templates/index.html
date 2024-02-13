@@ -80,7 +80,7 @@ Use the search bar to find specific books, or browse through our various categor
     </div>
   {% endfor %}
   {% if page >1 %}
-   <button clas='pagination'> <a href="{{url_for('index', page =page -1)}}">previous</a></button>
+   <button class='pagination'> <a href="{{url_for('index', page =page -1)}}">previous</a></button>
   {% endif %}
   <span>Page {{page}} of {{total_pages}}</span>
   {% if page< total_pages %}

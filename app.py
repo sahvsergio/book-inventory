@@ -1,4 +1,15 @@
 #!/usr/bin/env python3.10
+"""Provide several sample math calculations.
+
+This module allows the user to make mathematical calculations.
+
+The module contains the following functions:
+
+- `add(a, b)` - Returns the sum of two numbers.
+- `subtract(a, b)` - Returns the difference of two numbers.
+- `multiply(a, b)` - Returns the product of two numbers.
+- `divide(a, b)` - Returns the quotient of two numbers.
+"""
 
 import io
 import random
@@ -38,7 +49,21 @@ admin.add_view(ModelView(Book, db.session))
 
 @app.route('/', methods=['GET', 'POST'])  # decorator
 def index():
-    """creates the homepage for the app"""
+    """Compute and return the sum of two numbers.
+
+    Examples:
+        >>> add(4.0, 2.0)
+        6.0
+        >>> add(4, 2)
+        6.0
+
+    Args:
+        a (float): A number representing the first addend in the addition.
+        b (float): A number representing the second addend in the addition.
+
+    Returns:
+        float: A number representing the arithmetic sum of `a` and `b`.
+    """
     # get the entire books
     books = Book.query.all()
     # print the total books
@@ -67,7 +92,21 @@ def index():
 
 @app.route('/book/<id>')
 def book(id):
-    """Creates the view for the app"""
+    """Compute and return the sum of two numbers.
+
+    Examples:
+        >>> add(4.0, 2.0)
+        6.0
+        >>> add(4, 2)
+        6.0
+
+    Args:
+        a (float): A number representing the first addend in the addition.
+        b (float): A number representing the second addend in the addition.
+
+    Returns:
+        float: A number representing the arithmetic sum of `a` and `b`.
+    """
     book = Book.query.get_or_404(id)
     book_length = Book.query.all()
     isbn = book.isbn
@@ -84,7 +123,21 @@ def book(id):
 
 @app.route('/addbook', methods=['GET', 'POST'])
 def add_book():
-    """Creates the route to create new books on the app and adds it to the database"""
+    """Compute and return the sum of two numbers.
+
+    Examples:
+        >>> add(4.0, 2.0)
+        6.0
+        >>> add(4, 2)
+        6.0
+
+    Args:
+        a (float): A number representing the first addend in the addition.
+        b (float): A number representing the second addend in the addition.
+
+    Returns:
+        float: A number representing the arithmetic sum of `a` and `b`.
+    """
 
     if request.form:
         new_book = Book(book_name=request.form['book_name'],
@@ -105,7 +158,21 @@ def add_book():
 
 @app.route('/edit/<id>', methods=['GET', 'POST'])
 def edit_book(id):
-    """Edits the book information both in the app and database"""
+    """Compute and return the sum of two numbers.
+
+    Examples:
+        >>> add(4.0, 2.0)
+        6.0
+        >>> add(4, 2)
+        6.0
+
+    Args:
+        a (float): A number representing the first addend in the addition.
+        b (float): A number representing the second addend in the addition.
+
+    Returns:
+        float: A number representing the arithmetic sum of `a` and `b`.
+    """
     book = Book.query.get(id)
 
     if request.form:
@@ -127,7 +194,21 @@ def edit_book(id):
 
 @app.route('/delete/<id>')
 def delete_book(id):
-    """deletes books from the database and from the  app """
+    """Compute and return the sum of two numbers.
+
+    Examples:
+        >>> add(4.0, 2.0)
+        6.0
+        >>> add(4, 2)
+        6.0
+
+    Args:
+        a (float): A number representing the first addend in the addition.
+        b (float): A number representing the second addend in the addition.
+
+    Returns:
+        float: A number representing the arithmetic sum of `a` and `b`.
+    """
     book = Book.query.get(id)
     db.session.delete(book)
     db.session.commit()
@@ -136,6 +217,21 @@ def delete_book(id):
 
 @app.route('/search', methods=['GET', 'POST'])  # creating route
 def search():
+    """Compute and return the sum of two numbers.
+
+    Examples:
+        >>> add(4.0, 2.0)
+        6.0
+        >>> add(4, 2)
+        6.0
+
+    Args:
+        a (float): A number representing the first addend in the addition.
+        b (float): A number representing the second addend in the addition.
+
+    Returns:
+        float: A number representing the arithmetic sum of `a` and `b`.
+    """
     if request.method == 'POST':  # if there is a post request on this side
         form = request.form  # getting the form info
         # selecting the form field where there is one  search text
@@ -152,15 +248,44 @@ def search():
 
 @app.route('/stats')
 def stats():
+    """Compute and return the sum of two numbers.
+
+    Examples:
+        >>> add(4.0, 2.0)
+        6.0
+        >>> add(4, 2)
+        6.0
+
+    Args:
+        a (float): A number representing the first addend in the addition.
+        b (float): A number representing the second addend in the addition.
+
+    Returns:
+        float: A number representing the arithmetic sum of `a` and `b`.
+    """
 
     records = Book.query
-        
+
     return render_template('stats.html', title='Book Stats', records=records)
 
 
 @app.errorhandler(404)
 def not_found(error):
-    """Handles 404 errors-non existant pages"""
+    """Compute and return the sum of two numbers.
+
+    Examples:
+        >>> add(4.0, 2.0)
+        6.0
+        >>> add(4, 2)
+        6.0
+
+    Args:
+        a (float): A number representing the first addend in the addition.
+        b (float): A number representing the second addend in the addition.
+
+    Returns:
+        float: A number representing the arithmetic sum of `a` and `b`.
+    """
     return render_template('404.html', msg=error), 404
 
 
