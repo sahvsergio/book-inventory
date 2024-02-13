@@ -21,7 +21,7 @@ app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///books.db'
 db= SQLAlchemy(app)
 
 class Book(db.Model):
-     """
+    """
     A class used to represent an Animal
 
     ...
@@ -58,7 +58,6 @@ class Book(db.Model):
 
 #finish creating the fields here, before setting the site again
     def __repr__(self):
-        
         """Prints what the animals name is and what sound it makes.
 
         If the argument `sound` isn't passed in, the default Animal
