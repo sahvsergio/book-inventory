@@ -12,11 +12,14 @@ The module contains the following functions:
 """
 
 import io
-import random
+
+import base64
+from io import BytesIO
 
 
 # Third party imports
-# import matplotlib as plt
+import matplotlib as plt
+from matplotlib.figure import Figure
 
 
 import numpy as np
@@ -265,8 +268,40 @@ def stats():
     """
 
     records = Book.query
+    charts_data = charts()
 
-    return render_template('stats.html', title='Book Stats', records=records)
+    return render_template('stats.html', title='Book Stats', records=records, charts_data=charts_data)
+
+
+def charts():
+    """Compute and return the sum of two numbers.
+
+    Examples:
+        >>> add(4.0, 2.0)
+        6.0
+        >>> add(4, 2)
+        6.0
+
+    Args:
+        a (float): A number representing the first addend in the addition.
+        b (float): A number representing the second addend in the addition.
+
+    Returns:
+        float: A number representing the arithmetic sum of `a` and `b`.
+    """
+
+    # generate the plot without using pytplot
+    fig = Figure(figsize=(10, 4))
+
+    ax = fig.subplots()
+    ax.plot([1, 2])
+    # save it to a temporary buffer
+    buf = BytesIO()
+
+    fig.savefig(buf, format="png")
+    # embed the result in the html output
+    data = base64.b64encode(buf.getbuffer()).decode('ascii')
+    return f"<img src='data:image/png;base64,{data}' />"
 
 
 @app.errorhandler(404)
@@ -297,4 +332,4 @@ if __name__ == '__main__':
     # making the app run, you just need to run the app.py file on the terminal
     # local app.run(debug=True , port=8000, host='127.0.0.1')
     # internet
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8080, debug=True)

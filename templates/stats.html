@@ -1,7 +1,10 @@
 {% extends'layout.html' %} {%block button %}
 
+
 <button id="back-btn"><a href="{{url_for('index')}}">Back</a></button>
-{% endblock %} {% block content %}
+{% endblock %} 
+
+{% block content %}
 
 <table id="data" class="table table-striped">
   <thead>
@@ -23,4 +26,7 @@
     {% endfor %}
   </tbody>
 </table>
+
+{{ charts_data|safe }}
 {% endblock %}
+
