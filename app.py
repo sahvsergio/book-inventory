@@ -11,36 +11,50 @@ The module contains the following functions:
 - `divide(a, b)` - Returns the quotient of two numbers.
 """
 
-import io
 
-import base64
+# Standard library imports
+
+##creating a buffer
+import io
 from io import BytesIO
 
+# Third-party imports
 
-# Third party imports
-import matplotlib as plt
+##decoding the buffer
+import base64
+#plotting the  charts 
+import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 
-
+##data handling
 import numpy as np
 import pandas as pd
+
+##handling the apis
 import requests
+
+##handling the database and models
 import sqlalchemy
-from sqlalchemy import create_engine
-
-from flask import flash, redirect, render_template, request, url_for
-
-from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
-from sqlalchemy import cast, func, or_, select
+from sqlalchemy import create_engine, cast, func, or_, select
 from sqlalchemy.orm import scoped_session, sessionmaker
 
+##flask imports 
+from flask import flash, redirect, render_template, request, url_for
 
+##flask admin
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+
+#Local imports
+##models
 from models import Book, Flask, app, db
+
 
 # connect to the dabatase for pandas
 with app.app_context():
     engine = db.engine
+    
+#config the admin site
 
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 admin = Admin(app, name='Admin Panel', template_mode='bootstrap3')
@@ -52,17 +66,16 @@ admin.add_view(ModelView(Book, db.session))
 
 @app.route('/', methods=['GET', 'POST'])  # decorator
 def index():
-    """Compute and return the sum of two numbers.
+    """Renders the index page of the app.
 
     Examples:
-        >>> add(4.0, 2.0)
+        >>> index()
         6.0
-        >>> add(4, 2)
-        6.0
+        >>> index()
+        
 
     Args:
-        a (float): A number representing the first addend in the addition.
-        b (float): A number representing the second addend in the addition.
+       none
 
     Returns:
         float: A number representing the arithmetic sum of `a` and `b`.
