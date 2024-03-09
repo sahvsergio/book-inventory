@@ -28,7 +28,7 @@ from matplotlib.figure import Figure
 
 # data handling
 import numpy as np
-import pandas as pd
+
 
 # handling the apis
 import requests
@@ -45,14 +45,13 @@ from flask import flash, redirect, render_template, request, url_for
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
-#flask_bootstrap
-from flask_bootstrap import Bootstrap
-
+# flask_bootstrap
+from flask_bootstrap import Bootstrap5
 # Local imports
 # models
 from models import Book, Flask, app, db
 
-bootstrap = Bootstrap(app)
+bootstrap = Bootstrap5(app)
 # connect to the dabatase for pandas
 with app.app_context():
     engine = db.engine
