@@ -14,47 +14,50 @@ The module contains the following functions:
 
 # Standard library imports
 
-##creating a buffer
+# creating a buffer
 import io
 from io import BytesIO
 
 # Third-party imports
 
-##decoding the buffer
+# decoding the buffer
 import base64
-#plotting the  charts 
+# plotting the  charts
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 
-##data handling
+# data handling
 import numpy as np
 import pandas as pd
 
-##handling the apis
+# handling the apis
 import requests
 
-##handling the database and models
+# handling the database and models
 import sqlalchemy
 from sqlalchemy import create_engine, cast, func, or_, select
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-##flask imports 
+# flask imports
 from flask import flash, redirect, render_template, request, url_for
 
-##flask admin
+# flask admin
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
-#Local imports
-##models
+#flask_bootstrap
+from flask_bootstrap import Bootstrap
+
+# Local imports
+# models
 from models import Book, Flask, app, db
 
-
+bootstrap = Bootstrap(app)
 # connect to the dabatase for pandas
 with app.app_context():
     engine = db.engine
-    
-#config the admin site
+
+# config the admin site
 
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 admin = Admin(app, name='Admin Panel', template_mode='bootstrap3')
@@ -72,7 +75,7 @@ def index():
         >>> index()
         6.0
         >>> index()
-        
+
 
     Args:
        none
