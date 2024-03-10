@@ -1,8 +1,12 @@
-{% extends'layout.html' %}
-   
+{% extends'base.html' %}
+{% block title  %}
+
+{% endblock %}
 {%block button %}
 
-<button  id="add-book" class='button'><a href="{{url_for('add_book')}}">Add Book</a> </button>
+<button type="button"
+class="btn btn-dark"
+  <a href="{{url_for('add_book')}}">Add Book</a> </button>
    
 {% endblock %}
 

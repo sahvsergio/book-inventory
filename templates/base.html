@@ -8,18 +8,57 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <meta name="description" content=" A Collection of nice books" />
 
     {% block styles %}
     <!-- Bootstrap CSS -->
-    {{ bootstrap.load_css() }} {% endblock %}
+    {{ bootstrap.load_css() }} {% endblock %} {% endblock %} {% block title %}
 
-    <title>Your page title</title>
+    <title>Sergio's Book inventory App</title>
     {% endblock %}
   </head>
+
   <body>
+    {% block header %}
+    <header class="container">
+      <a class="row align-items-start" href="{{url_for('index')}}">
+        <picture class="col">
+          <img
+            src="{{url_for('static', filename='/images/sahvsergio.svg')}}"
+            alt="sergio herrera"
+          />
+        </picture>
+      </a>
+
+      <a class="row align-items-center" href="{{url_for('index')}}">
+        <h1 class="col">Book Inventory App</h1>
+      </a>
+      {% block button %} {% endblock %}
+    </header>
+    {% endblock %}
+
     <!-- Your page content -->
-    {% block content %}{% endblock %} {% block scripts %}
+    {% block content %} {% block footer %}
+    <footer>
+      <p class="copy">&copy; Copyright 2023</p>
+      <p class="copy">
+        Built with &#x2661; by
+        <a href="https://twitter.com/sahvsergio" target="_blank"
+          >Sergio Herrera (sahvsergio)</a
+        >
+      </p>
+    </footer>
+    {% endblock %} {% endblock %} {% block scripts %}
     <!-- Optional JavaScript -->
-    {{ bootstrap.load_js() }} {% endblock %}
+    {{ bootstrap.load_js() }}
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    {% endblock %}
   </body>
 </html>
