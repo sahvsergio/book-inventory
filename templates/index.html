@@ -1,14 +1,18 @@
 {% extends'base.html' %}
 {% block title  %}
-
+  {{super()}}
+ 
 {% endblock %}
+
+
 {%block button %}
 
 <button type="button"
-class="btn btn-dark"
-  <a href="{{url_for('add_book')}}">Add Book</a> </button>
+class="btn btn-dark btn-lg"
+  <a class=href= " {{ url_for('add_book') }}" >Add Book</a> </button>
    
 {% endblock %}
+
 
 {%block content %}
 <section class ="intro-section">
@@ -25,8 +29,8 @@ Use the search bar to find specific books, or browse through our various categor
 
 
    <form method='POST' id ='search'>
-    <input  type='text' autofocus='autofocus' name= 'searchstring'>
-    <input  id ='search_button'type='submit'formaction='/search' value='search'>
+    <input class='form-label' type='text' autofocus='autofocus' name= 'searchstring'>
+    <input  class='btn btn-dark btn-md' id ='search_button'type='submit'formaction='/search' value='search'>
    </form> 
 
 
@@ -74,7 +78,7 @@ Use the search bar to find specific books, or browse through our various categor
     <div class="book-card">
       
       <a href="{{ url_for('book', id=book.id) }}" target="_blank">
-        <img src="{{ book_cover_urls[loop.index0] }}" alt="{{ book.book_name }}" loading="lazy" class="book-pic">
+        <img src="{{book_cover_urls[loop.index0] }}" alt="{{ book.book_name }}" loading="lazy" class="book-pic">
         <div class="book-details">
           <h3 class="book-name">{{ book.book_name }}</h3>
           <p class="book-description">{{ book.description }}</p>
@@ -84,11 +88,11 @@ Use the search bar to find specific books, or browse through our various categor
     </div>
   {% endfor %}
   {% if page >1 %}
-   <button class='pagination'> <a href="{{url_for('index', page =page -1)}}">previous</a></button>
+   <button class='btn btn-dark btn-sm'> <a href="{{url_for('index', page =page -1)}}">previous</a></button>
   {% endif %}
   <span>Page {{page}} of {{total_pages}}</span>
   {% if page< total_pages %}
-   <button class= pagination> <a href="{{url_for('index', page=page+1)}}">Next</a></button>
+   <button class="btn btn-dark btn-sm <a href="{{url_for('index', page=page+1)}}">Next</a></button>
   {% endif %}
   
 </section>

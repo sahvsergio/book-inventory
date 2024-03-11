@@ -15,25 +15,29 @@
     {{ bootstrap.load_css() }} {% endblock %} {% endblock %} {% block title %}
 
     <title>Sergio's Book inventory App</title>
+
     {% endblock %}
   </head>
 
   <body>
     {% block header %}
-    <header class="container">
-      <a class="row align-items-start" href="{{url_for('index')}}">
-        <picture class="col">
-          <img
-            src="{{url_for('static', filename='/images/sahvsergio.svg')}}"
-            alt="sergio herrera"
-          />
-        </picture>
-      </a>
+    <header>
+      
+        <a  href="">
+          <picture>
+            <img class=''
+             
+              src="{{url_for('static', filename='/images/sahvsergio.svg')}}"
+              alt="sergio herrera"
+            />
+          </picture>
+        </a>
 
-      <a class="row align-items-center" href="{{url_for('index')}}">
-        <h1 class="col">Book Inventory App</h1>
-      </a>
-      {% block button %} {% endblock %}
+        <a href="{{url_for('index')}}">
+          <h1 class='' >Book Inventory App</h1>
+        </a>
+      {% block button %} {% endblock %}</div>
+    
     </header>
     {% endblock %}
 

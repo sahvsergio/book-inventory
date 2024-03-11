@@ -93,7 +93,7 @@ def index():
             book_cover_urls.append(book_cover.url)
         else:
 
-            book_cover_urls.append(None)
+            book_cover_urls.append(book_cover.url)
     # prepare pagination
     page = request.args.get('page', 1, type=int)
     per_page = 2
@@ -252,7 +252,7 @@ def search():
         form = request.form  # getting the form info
         # selecting the form field where there is one  search text
         search_value = form['searchstring']
-        # defining that whatever comes in the search value will be in there
+        # defining that whatever comes in the sexarch value will be in there
         search = '%{0}%'.format(search_value)
         results = Book.query.filter(or_(Book.book_name.like(search),  # making the query through sqlalchemy and sql like queries
                                         Book.isbn.like(search))).all()
