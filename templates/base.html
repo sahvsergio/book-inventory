@@ -8,18 +8,21 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="description" content=" A Collection of nice books" />
 
     {% block styles %}
     <!-- Bootstrap CSS -->
-    {{ bootstrap.load_css() }} {% endblock %} {% endblock %} {% block title %}
+    {{ bootstrap.load_css() }} {% endblock %}
 
+<<<<<<< HEAD
     <title>Sergio's Book inventory App</title>
 
+=======
+    <title>Your page title</title>
+>>>>>>> parent of e4a18b8a0 (removed layout.html to replace it with base.html and updated templates to respond to it)
     {% endblock %}
   </head>
-
   <body>
+<<<<<<< HEAD
     {% block header %}
     <header>
       
@@ -41,28 +44,11 @@
     </header>
     {% endblock %}
 
+=======
+>>>>>>> parent of e4a18b8a0 (removed layout.html to replace it with base.html and updated templates to respond to it)
     <!-- Your page content -->
-    {% block content %} {% block footer %}
-    <footer>
-      <p class="copy">&copy; Copyright 2023</p>
-      <p class="copy">
-        Built with &#x2661; by
-        <a href="https://twitter.com/sahvsergio" target="_blank"
-          >Sergio Herrera (sahvsergio)</a
-        >
-      </p>
-    </footer>
-    {% endblock %} {% endblock %} {% block scripts %}
+    {% block content %}{% endblock %} {% block scripts %}
     <!-- Optional JavaScript -->
-    {{ bootstrap.load_js() }}
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
-    {% endblock %}
+    {{ bootstrap.load_js() }} {% endblock %}
   </body>
 </html>

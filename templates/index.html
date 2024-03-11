@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends'base.html' %}
 {% block title  %}
   {{super()}}
@@ -10,6 +11,13 @@
 <button type="button"
 class="btn btn-dark btn-lg"
   <a class=href= " {{ url_for('add_book') }}" >Add Book</a> </button>
+=======
+{% extends'layout.html' %}
+   
+{%block button %}
+
+<button  id="add-book" class='button'><a href="{{url_for('add_book')}}">Add Book</a> </button>
+>>>>>>> parent of e4a18b8a0 (removed layout.html to replace it with base.html and updated templates to respond to it)
    
 {% endblock %}
 

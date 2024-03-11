@@ -5,7 +5,7 @@ This module allows the user to make mathematical calculations.
 
 The module contains the following functions:
 
-- `index(a, b)` - Returns the sum of two numbers.
+- `add(a, b)` - Returns the sum of two numbers.
 - `subtract(a, b)` - Returns the difference of two numbers.
 - `multiply(a, b)` - Returns the product of two numbers.
 - `divide(a, b)` - Returns the quotient of two numbers.
@@ -22,10 +22,13 @@ from io import BytesIO
 
 # decoding the buffer
 import base64
-
 # plotting the  charts
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
+
+# data handling
+import numpy as np
+
 
 # handling the apis
 import requests
@@ -50,7 +53,6 @@ from models import Book, Flask, app, db
 
 bootstrap = Bootstrap5(app)
 # connect to the dabatase for pandas
-app.config['BOOTSTRAP_BTN_STYLE'] = 'primary'
 with app.app_context():
     engine = db.engine
 
