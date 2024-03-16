@@ -1,95 +1,56 @@
-{% extends'layout.html' %}
-   
-{%block button %}
+{% extends'layout.html' %} {%block button %}
 
-<button  id="add-book" class='button'><a href="{{url_for('add_book')}}">Add Book</a> </button>
-   
-{% endblock %}
+<button id="add-book" class="button">
+  <a href="{{url_for('add_book')}}">Add Book</a>
+</button>
 
-{%block content %}
-<section class ="intro-section">
-        <h2>Welcome to our personal book inventory app! </h2>
-       
-<p id='intro-text' >Keep track of the books you own and create lists of books you'd like to read.
+{% endblock %} {%block content %}
+<section class="intro-section">
+  <h2>Welcome to our personal book inventory app!</h2>
 
-Use the search bar to find specific books, or browse through our various categories to discover new and exciting titles. You can also share your book lists with others onlinet </p> 
+  <p id="intro-text">
+    Keep track of the books you own and create lists of books you'd like to
+    read. Use the search bar to find specific books, or browse through our
+    various categories to discover new and exciting titles. You can also share
+    your book lists with others onlinet
+  </p>
 
-      
+  <form method="POST" id="search">
+    <input type="text" autofocus="autofocus" name="searchstring" />
+    <input
+      id="search_button"
+      type="submit"
+      formaction="/search"
+      value="search"
+    />
+  </form>
 
-    
-    
-
-
-   <form method='POST' id ='search'>
-    <input  type='text' autofocus='autofocus' name= 'searchstring'>
-    <input  id ='search_button'type='submit'formaction='/search' value='search'>
-   </form> 
-
-
-<h2 id='total-items'> We have a total of <strong class="total"> {{total_books}}</strong> in our inventory. Thank you for visiting and happy reading!</h2>
-  
+  <h2 id="total-items">
+    We have a total of <strong class="total"> {{total_books}}</strong> in our
+    inventory. Thank you for visiting and happy reading!
+  </h2>
 </section>
 
-<hr>
+<hr />
 
-<section  id='search-results' class='hidden'>
-  <h2>{{legend}}</h2>
- 
-   {% if books %}
-        
-          
-        {%for book  in books %}  
-        
-            
-        
-        <p class=''>  You are seeing  <strong id='total'> {{total_results}}</strong>  results for your query</p>
-         <div class="book-card">
-          <a href="{{ book_cover_urls[loop.index0] }}" target="_blank">
-          <img src="{{ url_for('static', filename=book.book_cover_url) }}" alt="{{ book.book_name }}" loading="lazy" class="book-pic">
-          <div class="book-details">
-          <h3 class="book-name">{{ book.book_name }}</h3>
-          <p class="book-description">{{ book.description }}</p>
-          <p class="book-genre">{{ book.genre }}</p>
-        </div>
-         </div>
-   
-
-        {% endfor %}
-
-    {% endif %}
-   
-
-        </section>
-
-
-  
-       
-    
-    <section id="bookshelf">
+<section id="bookshelf">
   {% for book in books_on_page %}
-    <div class="book-card">
-      
-      <a href="{{ url_for('book', id=book.id) }}" target="_blank">
-        <img src="{{ book_cover_urls[loop.index0] }}" alt="{{ book.book_name }}" loading="lazy" class="book-pic">
-        <div class="book-details">
-          <h3 class="book-name">{{ book.book_name }}</h3>
-          <p class="book-description">{{ book.description }}</p>
-          <p class="book-genre">{{ book.genre }}</p>
-        </div>
-      </a>
-    </div>
+  <div class="book-card">
+    <a href="{{ url_for('book', id=book.id) }}" target="_blank">
+      <img
+        src="{{ book_cover_urls[loop.index0] }}"
+        alt="{{ book.book_name }}"
+        loading="lazy"
+        class="book-pic"
+      />
+      <div class="book-details">
+        <h3 class="book-name">{{ book.book_name }}</h3>
+        <p class="book-description">{{ book.description }}</p>
+        <p class="book-genre">{{ book.genre }}</p>
+      </div>
+    </a>
+  </div>
   {% endfor %}
-  {% if page >1 %}
-   <button class='pagination'> <a href="{{url_for('index', page =page -1)}}">previous</a></button>
-  {% endif %}
-  <span>Page {{page}} of {{total_pages}}</span>
-  {% if page< total_pages %}
-   <button class= pagination> <a href="{{url_for('index', page=page+1)}}">Next</a></button>
-  {% endif %}
-  
 </section>
 
 {% endblock %}
-
-
-

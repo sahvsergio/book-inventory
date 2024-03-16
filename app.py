@@ -45,7 +45,7 @@ from flask import flash, redirect, render_template, request, url_for
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
-#flask_bootstrap
+# flask_bootstrap
 from flask_bootstrap import Bootstrap
 
 # Local imports
@@ -234,35 +234,6 @@ def delete_book(id):
     return redirect(url_for('index'))
 
 
-@app.route('/search', methods=['GET', 'POST'])  # creating route
-def search():
-    """Compute and return the sum of two numbers.
-
-    Examples:
-        >>> add(4.0, 2.0)
-        6.0
-        >>> add(4, 2)
-        6.0
-
-    Args:
-        a (float): A number representing the first addend in the addition.
-        b (float): A number representing the second addend in the addition.
-
-    Returns:
-        float: A number representing the arithmetic sum of `a` and `b`.
-    """
-    if request.method == 'POST':  # if there is a post request on this side
-        form = request.form  # getting the form info
-        # selecting the form field where there is one  search text
-        search_value = form['searchstring']
-        # defining that whatever comes in the search value will be in there
-        search = '%{0}%'.format(search_value)
-        results = Book.query.filter(or_(Book.book_name.like(search),  # making the query through sqlalchemy and sql like queries
-                                        Book.isbn.like(search))).all()
-        total_results = len(results)
-        return render_template('index.html', books=results, pageTitle='Sergio\'s Books', legend='Search  Results', total_results=total_results)
-    else:
-        return redirect('/')
 
 
 @app.route('/stats')
@@ -348,4 +319,4 @@ if __name__ == '__main__':
     # making the app run, you just need to run the app.py file on the terminal
     # local app.run(debug=True , port=8000, host='127.0.0.1')
     # internet
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8080, debug=True)
