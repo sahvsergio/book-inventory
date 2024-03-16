@@ -27,8 +27,7 @@ import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 
 # data handling
-import numpy as np
-import pandas as pd
+
 
 # handling the apis
 import requests
