@@ -46,7 +46,7 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
 # flask_bootstrap
-from flask_bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap5
 
 # Local imports
 # models
