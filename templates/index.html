@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% extends'base.html' %}
 {% block title  %}
   {{super()}}
@@ -6,27 +5,36 @@
 {% endblock %}
 
 
-{%block button %}
 
-<button type="button"
-class="btn btn-dark btn-lg"
-  <a class=href= " {{ url_for('add_book') }}" >Add Book</a> </button>
-=======
-{% extends'layout.html' %}
-   
-{%block button %}
 
-<button  id="add-book" class='button'><a href="{{url_for('add_book')}}">Add Book</a> </button>
->>>>>>> parent of e4a18b8a0 (removed layout.html to replace it with base.html and updated templates to respond to it)
-   
+
+
+{% block button %}
+<button id='add_book'
+ type="button" 
+ class="col
+  btn
+  btn-dark
+ btn-md  h-50"
+ >Add a book
+ <a class="d-flex justify-content-end" 
+ href="{{ url_for('add_book') }}">
+ </a>
+ </button>
+
 {% endblock %}
 
 
-{%block content %}
-<section class ="intro-section">
+   
+
+
+
+{% block content %}
+
+  <section class ="intro-section">
         <h2>Welcome to our personal book inventory app! </h2>
        
-<p id='intro-text' >Keep track of the books you own and create lists of books you'd like to read.
+        <p id='intro-text' >Keep track of the books you own and create lists of books you'd like to read.
 
 Use the search bar to find specific books, or browse through our various categories to discover new and exciting titles. You can also share your book lists with others onlinet </p> 
 
@@ -34,7 +42,6 @@ Use the search bar to find specific books, or browse through our various categor
 
     
     
-
 
    <form method='POST' id ='search'>
     <input class='form-label' type='text' autofocus='autofocus' name= 'searchstring'>
@@ -48,64 +55,31 @@ Use the search bar to find specific books, or browse through our various categor
 
 <hr>
 
-<section  id='search-results' class='hidden'>
-  <h2>{{legend}}</h2>
- 
-   {% if books %}
-        
-          
-        {%for book  in books %}  
-        
-            
-        
-        <p class=''>  You are seeing  <strong id='total'> {{total_results}}</strong>  results for your query</p>
-         <div class="book-card">
-          <a href="{{ book_cover_urls[loop.index0] }}" target="_blank">
-          <img src="{{ url_for('static', filename=book.book_cover_url) }}" alt="{{ book.book_name }}" loading="lazy" class="book-pic">
-          <div class="book-details">
-          <h3 class="book-name">{{ book.book_name }}</h3>
-          <p class="book-description">{{ book.description }}</p>
-          <p class="book-genre">{{ book.genre }}</p>
-        </div>
-         </div>
-   
 
-        {% endfor %}
 
-    {% endif %}
    
 
         </section>
-
-
-  
-       
-    
-    <section id="bookshelf">
-  {% for book in books_on_page %}
-    <div class="book-card">
+        <section id="bookshelf">
+        {% for book in books_on_page %}
+          <div class="book-card">
       
-      <a href="{{ url_for('book', id=book.id) }}" target="_blank">
-        <img src="{{book_cover_urls[loop.index0] }}" alt="{{ book.book_name }}" loading="lazy" class="book-pic">
-        <div class="book-details">
-          <h3 class="book-name">{{ book.book_name }}</h3>
-          <p class="book-description">{{ book.description }}</p>
-          <p class="book-genre">{{ book.genre }}</p>
-        </div>
-      </a>
+          <a href="{{ url_for('book', id=book.id) }}" target="_blank">
+          <img src="{{book_cover_urls[loop.index0] }}" alt="{{ book.book_name }}" loading="lazy" class="book-pic">
+            <div class="book-details">
+            <h3 class="book-name">{{ book.book_name }}</h3>
+            <p class="book-description">{{ book.description }}</p>
+            <p class="book-genre">{{ book.genre }}</p>
+              </div>
+            </a>
     </div>
   {% endfor %}
-  {% if page >1 %}
-   <button class='btn btn-dark btn-sm'> <a href="{{url_for('index', page =page -1)}}">previous</a></button>
-  {% endif %}
-  <span>Page {{page}} of {{total_pages}}</span>
-  {% if page< total_pages %}
-   <button class="btn btn-dark btn-sm <a href="{{url_for('index', page=page+1)}}">Next</a></button>
-  {% endif %}
-  
+
 </section>
 
 {% endblock %}
+
+
 
 
 
