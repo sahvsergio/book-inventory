@@ -11,43 +11,34 @@
 
     {% block styles %}
     <!-- Bootstrap CSS -->
-    {{ bootstrap.load_css() }} {% endblock %}
+    {{ bootstrap.load_css() }} {%endblock %}
 
-<<<<<<< HEAD
     <title>Sergio's Book inventory App</title>
 
-=======
-    <title>Your page title</title>
->>>>>>> parent of e4a18b8a0 (removed layout.html to replace it with base.html and updated templates to respond to it)
     {% endblock %}
   </head>
   <body>
-<<<<<<< HEAD
     {% block header %}
-    <header>
-      
-        <a  href="">
-          <picture>
-            <img class=''
-             
-              src="{{url_for('static', filename='/images/sahvsergio.svg')}}"
-              alt="sergio herrera"
-            />
-          </picture>
-        </a>
+    <header class="">
+      <a href="">
+        <picture>
+          <img
+            class="border border-dark rounded-circle"
+            src="{{url_for('static', filename='/images/sahvsergio.svg')}}"
+            alt="sergio herrera"
+          />
+        </picture>
+      </a>
 
-        <a href="{{url_for('index')}}">
-          <h1 class='' >Book Inventory App</h1>
-        </a>
-      {% block button %} {% endblock %}</div>
-    
+      <a href="{{url_for('index')}}">
+        <h1 class="">Book Inventory App</h1>
+      </a>
+      {% block button %} {% endblock %}
     </header>
     {% endblock %}
 
-=======
->>>>>>> parent of e4a18b8a0 (removed layout.html to replace it with base.html and updated templates to respond to it)
     <!-- Your page content -->
-    {% block content %}{% endblock %} {% block scripts %}
+    {% block content %} {% endblock %} {% block scripts %}
     <!-- Optional JavaScript -->
     {{ bootstrap.load_js() }} {% endblock %}
   </body>
