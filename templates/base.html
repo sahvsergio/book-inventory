@@ -19,19 +19,19 @@
   </head>
   <body>
     {% block header %}
-    <header class="container-fluid border border-dark border-bottom mx-auto">
-      <a href="">
+    <header class="container-fluid border border-dark border-bottom">
+      <a  class=""href="">
         <picture>
           <img
-            class="border border-dark rounded-circle hr-50 d-inline-block"
+            class="border border-dark rounded-circle hr-50 "
             src="{{url_for('static', filename='/images/sahvsergio.svg')}}"
             alt="sergio herrera"
-          />
-        </picture>
+          /> 
+        </picturec>
       </a>
 
-      <a href="{{url_for('index')}}">
-        <h1 class="text-center h-50 d-inline-block">Book Inventory App</h1>
+      <a class="pr-5  " href="{{url_for('index')}}">
+        <h1 class=" h-50 d-inline-block">Book Inventory App</h1>
       </a>
       {% block button %} {% endblock %}
     </header>
