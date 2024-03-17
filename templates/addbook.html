@@ -1,10 +1,10 @@
 
-{% extends'layout.html' %}
+{% extends'base.html' %}
 
 {%block button %}
 
 
-<button  id="back-btn"><a href="{{url_for('index')}}">back</a> </button>
+<button  class='btn btn-dark btn-lg'id="back-btn"><a href="{{url_for('index')}}">back</a> </button>
 
 {% endblock %}
 
@@ -67,7 +67,7 @@
                         </div>
                     </fieldset>
                     
-                    <button type="submit" class="submit-btn">Submit</button>
+                    <button  class='btn btn-dark btn-sm 'type="submit" class="submit-btn">Submit</button>
                 </form> 
 
 

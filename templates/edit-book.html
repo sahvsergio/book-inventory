@@ -1,8 +1,7 @@
-{% extends'layout.html' %}
-
+{% extends'base.html' %}
 {%block button %}
 
-<button id="back-btn"><a href="{{url_for('index')}}">Back</a> </button>
+<button id="btn btn-dark btn-sm"><a href="{{url_for('index')}}">Back</a> </button>
 {% endblock %}
 
 {% block content %}
@@ -64,7 +63,7 @@
                         </div>
                     </fieldset>
                     
-                    <button type="submit" class="btn btn-primary">Update Book info</button>
+                    <button type="submit" class="btn btn-dark btn-sm">Update Book info</button>
                 </form> 
 
 

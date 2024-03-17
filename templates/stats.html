@@ -1,18 +1,21 @@
-{% extends'layout.html' %} {%block button %}
+{% extends'base.html' %} 
+
+{% block button %}
 
 
 <button id="back-btn"><a href="{{url_for('index')}}">Back</a></button>
-{% endblock %} 
+{% endblock %}
+
 
 {% block content %}
 
-<table id="data" class="table table-striped">
-  <thead>
+<table id="data" class="table table-hover">
+  <thead class="thead-dark">
     <tr>
-      <th>Name</th>
-      <th>Number of pages</th>
-      <th>Language</th>
-      <th>Description</th>
+      <th scope="col">Name</th>
+      <th scope="col">Number of pages</th>
+      <th scope="col">Language</th>
+      <th scope="col">Description</th>
     </tr>
   </thead>
   <tbody>
@@ -27,6 +30,4 @@
   </tbody>
 </table>
 
-{{ charts_data|safe }}
-{% endblock %}
-
+{{ charts_data|safe }} {% endblock %}

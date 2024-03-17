@@ -1,29 +1,52 @@
-{% extends'layout.html' %} {%block button %}
+{% extends'base.html' %}
+{% block title  %}
+  {{super()}}
+ 
+{% endblock %}
 
-<button id="add-book" class="button">
-  <a href="{{url_for('add_book')}}">Add Book</a>
-</button>
 
-{% endblock %} {%block content %}
-<section class="intro-section">
-  <h2>Welcome to our personal book inventory app!</h2>
 
-  <p id="intro-text">
-    Keep track of the books you own and create lists of books you'd like to
-    read. Use the search bar to find specific books, or browse through our
-    various categories to discover new and exciting titles. You can also share
-    your book lists with others onlinet
-  </p>
 
-  <form method="POST" id="search">
-    <input type="text" autofocus="autofocus" name="searchstring" />
-    <input
-      id="search_button"
-      type="submit"
-      formaction="/search"
-      value="search"
-    />
-  </form>
+
+
+{% block button %}
+<button id='add_book'
+ type="button" 
+ class="inline-block
+  btn
+  btn-dark
+ btn-md  h-50"
+ >Add a book
+ <a class="d-flex justify-content-end" 
+ href="{{ url_for('add_book') }}">
+ </a>
+ </button>
+
+{% endblock %}
+
+
+   
+
+
+
+{% block content %}
+
+  <section class ="intro-section">
+        <h2>Welcome to our personal book inventory app! </h2>
+       
+        <p id='intro-text' >Keep track of the books you own and create lists of books you'd like to read.
+
+Use the search bar to find specific books, or browse through our various categories to discover new and exciting titles. You can also share your book lists with others onlinet </p> 
+
+      
+
+    
+    
+
+   <form method='POST' id ='search'>
+    <input class='form-label' type='text' autofocus='autofocus' name= 'searchstring'>
+    <input  class='btn btn-dark btn-md' id ='search_button'type='submit'formaction='/search' value='search'>
+   </form> 
 
   <h2 id="total-items">
     We have a total of <strong class="total"> {{total_books}}</strong> in our
@@ -31,26 +54,34 @@
   </h2>
 </section>
 
-<hr />
+<hr>
 
-<section id="bookshelf">
-  {% for book in books_on_page %}
-  <div class="book-card">
-    <a href="{{ url_for('book', id=book.id) }}" target="_blank">
-      <img
-        src="{{ book_cover_urls[loop.index0] }}"
-        alt="{{ book.book_name }}"
-        loading="lazy"
-        class="book-pic"
-      />
-      <div class="book-details">
-        <h3 class="book-name">{{ book.book_name }}</h3>
-        <p class="book-description">{{ book.description }}</p>
-        <p class="book-genre">{{ book.genre }}</p>
-      </div>
-    </a>
-  </div>
+
+
+   
+
+        </section>
+        <section id="bookshelf">
+        {% for book in books_on_page %}
+        
+          <div class="book-card">
+      
+          <a href="{{ url_for('book', id=book.id) }}" target="_blank">
+          <img src="{{book_cover_urls[loop.index0] }}" alt="{{ book.book_name }}" loading="lazy" class="book-pic">
+            <div class="book-details">
+            <h3 class="book-name">{{ book.book_name }}</h3>
+            <p class="book-description">{{ book.description }}</p>
+            <p class="book-genre">{{ book.genre }}</p>
+              </div>
+            </a>
+    </div>
   {% endfor %}
+
 </section>
 
 {% endblock %}
+
+
+
+
+

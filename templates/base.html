@@ -11,14 +11,34 @@
 
     {% block styles %}
     <!-- Bootstrap CSS -->
-    {{ bootstrap.load_css() }} {% endblock %}
+    {{ bootstrap.load_css() }} {%endblock %}
 
-    <title>Your page title</title>
+    <title>Sergio's Book inventory App</title>
+
     {% endblock %}
   </head>
   <body>
+    {% block header %}
+    <header class="container-fluid border border-dark border-bottom">
+      <a  class=""href="">
+        <picture>
+          <img
+            class="border border-dark rounded-circle hr-50 "
+            src="{{url_for('static', filename='/images/sahvsergio.svg')}}"
+            alt="sergio herrera"
+          /> 
+        </picturec>
+      </a>
+
+      <a class="pr-5  " href="{{url_for('index')}}">
+        <h1 class=" h-50 d-inline-block">Book Inventory App</h1>
+      </a>
+      {% block button %} {% endblock %}
+    </header>
+    {% endblock %}
+
     <!-- Your page content -->
-    {% block content %}{% endblock %} {% block scripts %}
+    {% block content %} {% endblock %} {% block scripts %}
     <!-- Optional JavaScript -->
     {{ bootstrap.load_js() }} {% endblock %}
   </body>
