@@ -47,10 +47,6 @@ from flask_admin.contrib.sqla import ModelView
 
 # flask_bootstrap
 from flask_bootstrap import Bootstrap5
-<<<<<<< HEAD
-
-=======
->>>>>>> bootstrap
 # Local imports
 # models
 from models import Book, Flask, app, db
@@ -195,8 +191,9 @@ def edit_book(id):
     Returns:
         float: A number representing the arithmetic sum of `a` and `b`.
     """
+    # access the book model by id
     book = Book.query.get(id)
-
+    # check if there is a  form
     if request.form:
         book.book_name = request.form['book_name']
         book.isbn = request.form['ISBN']
@@ -237,8 +234,6 @@ def delete_book(id):
     return redirect(url_for('index'))
 
 
-<<<<<<< HEAD
-=======
 @app.route('/search', methods=['GET', 'POST'])  # creating route
 def search():
     """Compute and return the sum of two numbers.
@@ -256,19 +251,42 @@ def search():
     Returns:
         float: A number representing the arithmetic sum of `a` and `b`.
     """
-    if request.method == 'POST':  # if there is a post request on this side
-        form = request.form  # getting the form info
-        # selecting the form field where there is one  search text
+    # check for the request
+    
+    if request.method == 'POST':
+        # save the form info
+        form = request.form
+        # retrieve the data contained in the search field
         search_value = form['searchstring']
-        # defining that whatever comes in the sexarch value will be in there
+        # transform the data to a sql friendly form
         search = '%{0}%'.format(search_value)
-        results = Book.query.filter(or_(Book.book_name.like(search),  # making the query through sqlalchemy and sql like queries
+        # making the query through sqlalchemy and sql like queries
+        results = Book.query.filter(or_(Book.book_name.like(search),
                                         Book.isbn.like(search))).all()
-        total_results = len(results)
-        return render_template('index.html', books=results, pageTitle='Sergio\'s Books', legend='Search  Results', total_results=total_results)
+        book_cover_urls=[]
+        for result in results:
+            isbn = result.isbn
+            book_cover = requests.get(
+            f'https://covers.openlibrary.org/b/isbn/{isbn}-M.jpg')
+            if book_cover.status_code == 200:
+                book_cover_urls.append(book_cover.url)
+            else:
+                book_cover_urls.append(book_cover.url)
+        
+        page = request.args.get('page', 1, type=int)
+        per_page = 2
+
+        start = (page-1)*per_page
+        end = start+per_page
+        total_pages = (len(results)+per_page-1)//per_page
+        
+ 
+        
+        return render_template('index.html', results=results, page =page, total_pages=total_pages, book_cover_urls=book_cover_urls)
+        
+
     else:
-        return redirect('/')
->>>>>>> bootstrap
+        return redirect ('index.html')
 
 
 @app.route('/stats')
