@@ -98,7 +98,7 @@ def index():
             book_cover_urls.append(book_cover.url)
     # prepare pagination
     page = request.args.get('page', 1, type=int)
-    per_page = 2
+    per_page = 1
 
     start = (page-1)*per_page
     end = start+per_page
@@ -252,7 +252,7 @@ def search():
         float: A number representing the arithmetic sum of `a` and `b`.
     """
     # check for the request
-    
+
     if request.method == 'POST':
         # save the form info
         form = request.form
@@ -263,30 +263,27 @@ def search():
         # making the query through sqlalchemy and sql like queries
         results = Book.query.filter(or_(Book.book_name.like(search),
                                         Book.isbn.like(search))).all()
-        book_cover_urls=[]
+        book_cover_urls = []
         for result in results:
             isbn = result.isbn
             book_cover = requests.get(
-            f'https://covers.openlibrary.org/b/isbn/{isbn}-M.jpg')
+                f'https://covers.openlibrary.org/b/isbn/{isbn}-M.jpg')
             if book_cover.status_code == 200:
                 book_cover_urls.append(book_cover.url)
             else:
                 book_cover_urls.append(book_cover.url)
-        
+
         page = request.args.get('page', 1, type=int)
-        per_page = 2
+        per_page = 1
 
         start = (page-1)*per_page
         end = start+per_page
         total_pages = (len(results)+per_page-1)//per_page
-        
- 
-        
-        return render_template('index.html', results=results, page =page, total_pages=total_pages, book_cover_urls=book_cover_urls)
-        
+
+        return render_template('index.html', results=results, page=page, total_pages=total_pages, book_cover_urls=book_cover_urls)
 
     else:
-        return redirect ('index.html')
+        return redirect('index.html')
 
 
 @app.route('/stats')

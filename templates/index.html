@@ -55,16 +55,29 @@ Use the search bar to find specific books, or browse through our various categor
             </a>
     </div>
   {% endfor %}
+
+
+  {% if page >1 %}
+  
+  <a href='{{ url_for("index", page = page - 1) }}'>Previous</a>
+  
+  {% endif %}
+  
+  <span>Page {{page}} of {{total_pages}}</span>
+  
+  {% if page < total_pages %} <a href='{{ url_for ("index", page = page + 1) }}'>Next</a>
+  
+    {% endif %}
  
 </section>
 
 
+{% if  results  %}
+{% for result in results %}
 
-
-  {% for result in results  %} 
-  <section id="search-resutls">
+<section id="search-resutls">
   <div class="book-card">
-  
+
     <a href="{{ url_for('book', id=result.id) }}" target="_blank">
       <img src="{{book_cover_urls[loop.index0] }}" alt="{{ result.book_name }}" loading="lazy" class="book-pic">
       <div class="book-details">
@@ -74,27 +87,30 @@ Use the search bar to find specific books, or browse through our various categor
       </div>
     </a>
   </div>
+  {% if page >1 %}
 
-
-   </section>
-    
-    
-  
-  
-  
-  {% endfor %}
-
-{% if page >1 %}
-
-<a href='{{ url_for("index", page = page - 1) }}'>Previous</a>
-
-{% endif %}
-
-<span>Page {{page}} of {{total_pages}}</span>
-
-{% if page < total_pages %} <a href='{{ url_for ("index", page = page + 1) }}'>Next</a>
+  <a href='{{ url_for("index", page = page - 1) }}'>Previous</a>
 
   {% endif %}
+
+  <span>Page {{page}} of {{total_pages}}</span>
+
+  {% if page < total_pages %} <a href='{{ url_for ("index", page = page + 1) }}'>Next</a>
+
+    {% endif %}
+
+</section>
+
+
+
+
+
+{% endfor %}
+
+
+{% else %}
+{% endif %}
+ 
 
 
 
