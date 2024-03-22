@@ -7,7 +7,7 @@
 
 {% block button %}
 
-<button id="add_book"> <a href="{{url_for('add_book')}}">Add Book</a> </button>
+<button id="add_book"class='btn btn-dark'> <a href="{{url_for('add_book')}}">Add Book</a> </button>
 
 {% endblock %}
 
@@ -15,9 +15,9 @@
 {% block content %}
 
   <section class ="intro-section">
-        <h2>Welcome to our personal book inventory app! </h2>
+        <h2 class="h2">Welcome to our personal book inventory app! </h2>
        
-        <p id='intro-text' >Keep track of the books you own and create lists of books you'd like to read.
+        <p id='intro-text' class="lead" >Keep track of the books you own and create lists of books you'd like to read.
 
 Use the search bar to find specific books, or browse through our various categories to discover new and exciting titles. You can also share your book lists with others onlinet </p> 
 
@@ -36,19 +36,19 @@ Use the search bar to find specific books, or browse through our various categor
 
 </section>
 
-<section id="bookshelf" >
-<h2 id="total-items">
-  We have a total of <strong class="total"> {{total_books}}</strong> in our
+<section id="bookshelf" class=" container-fluid " >
+<h2 id=" h2">
+  We have a total of <strong class="""> {{total_books}}</strong> in our
   inventory. Thank you for visiting and happy reading!
 </h2>
  {% for book in books_on_page %}
 
-      <div class="book-card">
+      <div class="book-card card">
       
-          <a href="{{ url_for('book', id=book.id) }}" target="_blank">
+          <a class="card-body border border-dark" href="{{ url_for('book', id=book.id) }}" target="_blank">
           <img src="{{book_cover_urls[loop.index0] }}" alt="{{ book.book_name }}" loading="lazy" class="book-pic">
             <div class="book-details">
-            <h3 class="book-name">{{ book.book_name }}</h3>
+            <h3 class="book-name card-title">{{ book.book_name }}</h3>
             <p class="book-description">{{ book.description }}</p>
             <p class="book-genre">{{ book.genre }}</p>
               </div>
@@ -63,9 +63,10 @@ Use the search bar to find specific books, or browse through our various categor
   
   {% endif %}
   
-  <span>Page {{page}} of {{total_pages}}</span>
+  <span >Page {{page}} of {{total_pages}}</span>
   
-  {% if page < total_pages %} <a href='{{ url_for ("index", page = page + 1) }}'>Next</a>
+  {% if page < total_pages %} 
+  <a  href='{{ url_for ("index", page = page + 1) }}'>Next</a>
   
     {% endif %}
  
@@ -75,14 +76,14 @@ Use the search bar to find specific books, or browse through our various categor
 {% if  results  %}
 {% for result in results %}
 
-<section id="search-resutls">
+<section id="search-results container-fluid">
   <div class="book-card">
 
-    <a href="{{ url_for('book', id=result.id) }}" target="_blank">
-      <img src="{{book_cover_urls[loop.index0] }}" alt="{{ result.book_name }}" loading="lazy" class="book-pic">
+    <a class="card-link" href="{{ url_for('book', id=result.id) }}" target="_blank">
+      <img class="" src="{{book_cover_urls[loop.index0] }}" alt="{{ result.book_name }}" loading="lazy" class="book-pic">
       <div class="book-details">
-        <h3 class="book-name">{{ result.book_name }}</h3>
-        <p class="book-description">{{ result.description }}</p>
+        <h3 class="book-name card-title">{{ result.book_name }}</h3>
+        <p class="book-description card-text">{{ result.description }}</p>
         <p class="book-genre">{{ result.genre }}</p>
       </div>
     </a>

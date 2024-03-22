@@ -1,15 +1,9 @@
-{% extends'base.html' %} 
-
-{% block button %}
-
+{% extends'base.html' %} {% block button %}
 
 <button id="back-btn"><a href="{{url_for('index')}}">Back</a></button>
-{% endblock %}
+{% endblock %} {% block content %}
 
-
-{% block content %}
-
-<table id="data" class="table table-hover">
+<table id="data" class="table table-dark table-striped table-hover">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>
@@ -20,7 +14,7 @@
   </thead>
   <tbody>
     {% for record in records %}
-    <tr>
+    <tr class="table-active">
       <td>{{ record.book_name }}</td>
       <td>{{ record.number_of_pages }}</td>
       <td>{{ record.language }}</td>
