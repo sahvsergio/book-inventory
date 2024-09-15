@@ -15,9 +15,8 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 
 
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///books.db'
+app = Flask(__name__, instance_path=f'{os.getcwd()}')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///books.db'
 db= SQLAlchemy(app)
 
 class Book(db.Model):
