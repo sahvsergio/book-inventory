@@ -1,211 +1,133 @@
 #!/usr/bin/env python3.10
-"""Provide several sample math calculations.
-
-This module allows the user to make mathematical calculations.
-
-The module contains the following functions:
-
-- `add(a, b)` - Returns the sum of two numbers.
-- `subtract(a, b)` - Returns the difference of two numbers.
-- `multiply(a, b)` - Returns the product of two numbers.
-- `divide(a, b)` - Returns the quotient of two numbers.
-"""
-
-
-# Standard library imports
-
-# creating a buffer
 import io
 from io import BytesIO
-
-# Third-party imports
-
-# decoding the buffer
 import base64
-# plotting the  charts
+import os
+import requests
+import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 
-# data handling
-import numpy as np
-
-
-# handling the apis
-import requests
-
-# handling the database and models
 import sqlalchemy
-from sqlalchemy import create_engine, cast, func, or_, select
+from sqlalchemy import cast, create_engine, func, or_, select
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-# flask imports
-from flask import flash, redirect, render_template, request, url_for
-
-# flask admin
+from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-
-# flask_bootstrap
 from flask_bootstrap import Bootstrap5
-# Local imports
-# models
-from models import Book, Flask, app, db
 
+# ==========================================
+# 1. ONE-WAY IMPORTS FROM MODELS
+# ==========================================
+from models import db, Book  # Pull both out of models.py smoothly
+
+app = Flask(__name__, instance_path=f'{os.getcwd()}')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///books.db'
+app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
+
+# Bind the database to this app instance
+db.init_app(app)
 bootstrap = Bootstrap5(app)
-# connect to the dabatase for pandas
+
+# Connect to the database engine for extension use cases
 with app.app_context():
     engine = db.engine
 
-# config the admin site
-
-app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
+# Config the admin site
 admin = Admin(app, name='Admin Panel', template_mode='bootstrap3')
-
 admin.add_view(ModelView(Book, db.session))
 
-# create routes(visible parts of the site- urls)
+# ==========================================
+# 3. ROUTE DEFINITIONS (Keep all routes exactly the same as before)
+# ==========================================
+# ==========================================
+# 3. ROUTE DEFINITIONS
+# ==========================================
 
-
-@app.route('/', methods=['GET', 'POST'])  # decorator
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    """Renders the index page of the app.
-
-    Examples:
-        >>> index()
-        6.0
-        >>> index()
-
-
-    Args:
-       none
-
-    Returns:
-        float: A number representing the arithmetic sum of `a` and `b`.
-    """
-    # get the entire books
-    books = Book.query.all()
-    # print the total books
+    """Renders the main index page with book listings and pagination."""
+    # Retrieve all book records smoothly via modern execution
+    books = db.session.execute(db.select(Book)).scalars().all()
     total_books = len(books)
-    book_cover_urls = []
-    for book in books:
-        isbn = book.isbn
-        book_cover = requests.get(
-            f'https://covers.openlibrary.org/b/isbn/{isbn}-M.jpg')
-        if book_cover.status_code == 200:
-            book_cover_urls.append(book_cover.url)
-        else:
-
-            book_cover_urls.append(book_cover.url)
-    # prepare pagination
+    
+    # Prepare pagination parameters systematically
     page = request.args.get('page', 1, type=int)
     per_page = 10
-
-    start = (page-1)*per_page
-    end = start+per_page
-    total_pages = (len(books)+per_page-1)//per_page
+    start = (page - 1) * per_page
+    end = start + per_page
+    total_pages = (len(books) + per_page - 1) // per_page
     books_on_page = books[start:end]
 
-    return render_template('index.html', books=books, total_books=total_books, book_cover_urls=book_cover_urls, books_on_page=books_on_page, total_pages=total_pages, page=page)
+    return render_template(
+        'index.html', 
+        books=books, 
+        total_books=total_books, 
+        books_on_page=books_on_page, 
+        total_pages=total_pages, 
+        page=page
+    )
 
 
 @app.route('/book/<id>')
 def book(id):
-    """Compute and return the sum of two numbers.
-
-    Examples:
-        >>> add(4.0, 2.0)
-        6.0
-        >>> add(4, 2)
-        6.0
-
-    Args:
-        a (float): A number representing the first addend in the addition.
-        b (float): A number representing the second addend in the addition.
-
-    Returns:
-        float: A number representing the arithmetic sum of `a` and `b`.
-    """
-    book = Book.query.get_or_404(id)
-    book_length = Book.query.all()
+    """Fetches details for a single book using SQLAlchemy 3.0+ session handling."""
+    # Book.query.get_or_404 is deprecated/broken in modern setups
+    book = db.session.get(Book, id)
+    if not book:
+        return render_template('404.html', msg="Book data structure not found."), 404
+        
+    book_length = db.session.execute(db.select(Book)).scalars().all()
     isbn = book.isbn
-    print('this is the isbn for this book', isbn)
-    book_cover = requests.get(
-        f'https://covers.openlibrary.org/b/isbn/{isbn}-L.jpg')
-    if book_cover.status_code == 200:
-        book_cover_url = book_cover.url
-        print('this is the url for the book cover', book_cover.url)
-        return render_template('book.html', book=book, book_length=book_length, isbn=isbn, book_cover_url=book_cover_url)
-    else:
-        return render_template('book.html', book=book, book_length=book_length, isbn=isbn, book_cover_url=book_cover_url)
+    
+    return render_template(
+        'book.html', 
+        book=book, 
+        book_length=book_length, 
+        isbn=isbn
+    )
 
 
 @app.route('/addbook', methods=['GET', 'POST'])
 def add_book():
-    """Compute and return the sum of two numbers.
-
-    Examples:
-        >>> add(4.0, 2.0)
-        6.0
-        >>> add(4, 2)
-        6.0
-
-    Args:
-        a (float): A number representing the first addend in the addition.
-        b (float): A number representing the second addend in the addition.
-
-    Returns:
-        float: A number representing the arithmetic sum of `a` and `b`.
-    """
-
-    if request.form:
-        new_book = Book(book_name=request.form['book_name'],
-                        isbn=request.form['ISBN'],
-                        date_published=request.form['date_pusblished'],
-                        genre=request.form['genre'],
-                        date_sold=request.form['date_sold'],
-                        number_of_pages=request.form['number_of_pages'],
-                        language=request.form['language'],
-                        description=request.form['description'],
-                        )
+    """Handles the creation of a new Book entry into the database repository."""
+    if request.method == 'POST' and request.form:
+        new_book = Book(
+            book_name=request.form['book_name'],
+            isbn=request.form['ISBN'],
+            date_published=request.form['date_pusblished'],
+            genre=request.form['genre'],
+            date_sold=request.form['date_sold'],
+            number_of_pages=int(request.form['number_of_pages']) if request.form['number_of_pages'].isdigit() else 0,
+            language=request.form['language'],
+            description=request.form['description'],
+        )
         db.session.add(new_book)
         db.session.commit()
-
         return redirect(url_for('index'))
+        
     return render_template('addbook.html')
 
 
 @app.route('/edit/<id>', methods=['GET', 'POST'])
 def edit_book(id):
-    """Compute and return the sum of two numbers.
+    """Updates an existing Book entity safely via session state management."""
+    book = db.session.get(Book, id)
+    if not book:
+        return render_template('404.html', msg="Book data structure not found."), 404
 
-    Examples:
-        >>> add(4.0, 2.0)
-        6.0
-        >>> add(4, 2)
-        6.0
-
-    Args:
-        a (float): A number representing the first addend in the addition.
-        b (float): A number representing the second addend in the addition.
-
-    Returns:
-        float: A number representing the arithmetic sum of `a` and `b`.
-    """
-    # access the book model by id
-    book = Book.query.get(id)
-    # check if there is a  form
-    if request.form:
+    if request.method == 'POST' and request.form:
         book.book_name = request.form['book_name']
         book.isbn = request.form['ISBN']
         book.date_published = request.form['date_pusblished']
         book.genre = request.form['genre']
         book.date_sold = request.form['date_sold']
-        book.number_of_pages = request.form['number_of_pages']
+        book.number_of_pages = int(request.form['number_of_pages']) if request.form['number_of_pages'].isdigit() else 0
         book.language = request.form['language']
         book.description = request.form['description']
 
         db.session.commit()
-
         return redirect(url_for('index'))
 
     return render_template('edit-book.html', book=book)
@@ -213,160 +135,84 @@ def edit_book(id):
 
 @app.route('/delete/<id>')
 def delete_book(id):
-    """Compute and return the sum of two numbers.
-
-    Examples:
-        >>> add(4.0, 2.0)
-        6.0
-        >>> add(4, 2)
-        6.0
-
-    Args:
-        a (float): A number representing the first addend in the addition.
-        b (float): A number representing the second addend in the addition.
-
-    Returns:
-        float: A number representing the arithmetic sum of `a` and `b`.
-    """
-    book = Book.query.get(id)
-    db.session.delete(book)
-    db.session.commit()
+    """Deletes a targeted book record safely without crashing the transaction manager."""
+    book = db.session.get(Book, id)
+    if book:
+        db.session.delete(book)
+        db.session.commit()
     return redirect(url_for('index'))
 
 
-@app.route('/search', methods=['GET', 'POST'])  # creating route
+@app.route('/search', methods=['GET', 'POST'])
 def search():
-    """Compute and return the sum of two numbers.
-
-    Examples:
-        >>> add(4.0, 2.0)
-        6.0
-        >>> add(4, 2)
-        6.0
-
-    Args:
-        a (float): A number representing the first addend in the addition.
-        b (float): A number representing the second addend in the addition.
-
-    Returns:
-        float: A number representing the arithmetic sum of `a` and `b`.
-    """
-    # check for the request
-
+    """Executes structural SQL LIKE operations to query items matching criteria."""
     if request.method == 'POST':
-        # save the form info
         form = request.form
-        # retrieve the data contained in the search field
         search_value = form['searchstring']
-        # transform the data to a sql friendly form
-        search = '%{0}%'.format(search_value)
-        # making the query through sqlalchemy and sql like queries
-        results = Book.query.filter(or_(Book.book_name.like(search),
-                                        Book.isbn.like(search))).all()
-        book_cover_urls = []
-        for result in results:
-            isbn = result.isbn
-            book_cover = requests.get(
-                f'https://covers.openlibrary.org/b/isbn/{isbn}-M.jpg')
-            if book_cover.status_code == 200:
-                book_cover_urls.append(book_cover.url)
-            else:
-                book_cover_urls.append(book_cover.url)
+        search_pattern = f'%{search_value}%'
+        
+        # Modern execution block matching SQLAlchemy 2.0/3.0 paradigms
+        stmt = db.select(Book).where(
+            or_(
+                Book.book_name.like(search_pattern),
+                Book.isbn.like(search_pattern)
+            )
+        )
+        results = db.session.execute(stmt).scalars().all()
 
         page = request.args.get('page', 1, type=int)
-        per_page = 1
+        per_page = 10
+        total_pages = (len(results) + per_page - 1) // per_page
 
-        start = (page-1)*per_page
-        end = start+per_page
-        total_pages = (len(results)+per_page-1)//per_page
-
-        return render_template('index.html', results=results, page=page, total_pages=total_pages, book_cover_urls=book_cover_urls)
-
+        return render_template(
+            'index.html', 
+            results=results, 
+            page=page, 
+            total_pages=total_pages
+        )
     else:
-        return redirect('index.html')
+        return redirect(url_for('index'))
 
 
 @app.route('/stats')
 def stats():
-    """Compute and return the sum of two numbers.
-
-    Examples:
-        >>> add(4.0, 2.0)
-        6.0
-        >>> add(4, 2)
-        6.0
-
-    Args:
-        a (float): A number representing the first addend in the addition.
-        b (float): A number representing the second addend in the addition.
-
-    Returns:
-        float: A number representing the arithmetic sum of `a` and `b`.
-    """
-
-    records = Book.query
+    """Calculates statistics and presents transactional data charts."""
+    records = db.session.execute(db.select(Book)).scalars().all()
     charts_data = charts()
 
-    return render_template('stats.html', title='Book Stats', records=records, charts_data=charts_data)
+    return render_template(
+        'stats.html', 
+        title='Book Stats', 
+        records=records, 
+        charts_data=charts_data
+    )
 
 
 def charts():
-    """Compute and return the sum of two numbers.
-
-    Examples:
-        >>> add(4.0, 2.0)
-        6.0
-        >>> add(4, 2)
-        6.0
-
-    Args:
-        a (float): A number representing the first addend in the addition.
-        b (float): A number representing the second addend in the addition.
-
-    Returns:
-        float: A number representing the arithmetic sum of `a` and `b`.
-    """
-
-    # generate the plot without using pytplot
+    """Generates an embedded visualization plot for tracking metric performance."""
     fig = Figure(figsize=(10, 4))
-
     ax = fig.subplots()
     ax.plot([1, 2])
-    # save it to a temporary buffer
+    
     buf = BytesIO()
-
     fig.savefig(buf, format="png")
-    # embed the result in the html output
     data = base64.b64encode(buf.getbuffer()).decode('ascii')
+    
     return f"<img src='data:image/png;base64,{data}' />"
 
 
 @app.errorhandler(404)
 def not_found(error):
-    """Compute and return the sum of two numbers.
-
-    Examples:
-        >>> add(4.0, 2.0)
-        6.0
-        >>> add(4, 2)
-        6.0
-
-    Args:
-        a (float): A number representing the first addend in the addition.
-        b (float): A number representing the second addend in the addition.
-
-    Returns:
-        float: A number representing the arithmetic sum of `a` and `b`.
-    """
+    """Standard fallback route handler for missing files or endpoints."""
     return render_template('404.html', msg=error), 404
 
 
+# ==========================================
+# 4. RUNTIME SYSTEM EXECUTION
+# ==========================================
 if __name__ == '__main__':
-    # if it were to be exported to a diffent filem then the --main .- would be the name of the file it is exported t
     with app.app_context():
         db.create_all()
 
-    # making the app run, you just need to run the app.py file on the terminal
-    # local app.run(debug=True , port=8000, host='127.0.0.1')
-    # internet
+    # Network-accessible infrastructure interface run setup
     app.run(host='0.0.0.0', port=8080, debug=True)
