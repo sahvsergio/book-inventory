@@ -1,5 +1,14 @@
 
 # Book Inventory App
+## Project description
+## Features
+## Installation
+## Usage
+## Technologies
+## Screenshots
+## Demo link
+
+Add a setup section so visitors can understand how to run the project.
 
 The book inventory app is a flask app that helps keep record of the books a person has
 
